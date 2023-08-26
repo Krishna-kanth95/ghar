@@ -1,0 +1,28 @@
+name: Ansible Deployment
+
+on:
+  push:
+    branches:
+      - main  # Trigger on changes to the main branch
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Specify your self-hosted runner's label here
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Copy Playbook and Inventory to Runner
+        run: |
+          mkdir -p playbook
+          cp -r ansible-playbook/* playbook/
+          cp inventory.ini playbook/
+        working-directory: ${{ github.workspace }}
+
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook -i playbook/inventory.ini playbook/jenkins.yml
+        working-directory: ${{ github.workspace }}
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"  # Disable host key checking
