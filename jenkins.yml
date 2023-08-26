@@ -34,7 +34,6 @@
       service:
         name: jenkins
         state: started
-       
     #- name: Ensure jenkins service added to firewalld
     #  firewalld:
     #    service: jenkins
