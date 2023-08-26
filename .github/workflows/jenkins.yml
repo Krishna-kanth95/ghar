@@ -16,7 +16,7 @@ jobs:
       - name: Copy Playbook and Inventory to Runner
         run: |
           mkdir -p playbook
-          cp -r ansible-playbook/* playbook/
+          cp -r jenkins.yml playbook/
           cp inventory.ini playbook/
         working-directory: ${{ github.workspace }}
 
