@@ -13,13 +13,27 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
+       
     - name: Update Inventory File
       run: |
         # Use the provided EC2 instance IP address and update your inventory.ini file
         echo "[ec2]" > inventory.ini
         echo "instance ansible_host=$INSTANCE_IP" >> inventory.ini
-
+   
+    - name: Copy Playbook and Inventory to Runner
+      run: |
+          mkdir -p playbook
+          cp -r jenkins.yml playbook/
+          cp inventory.ini playbook/
+      working-directory: ${{ github.workspace }}
+    
+    - name: Run Ansible Playbook
+      run: |
+         ansible-playbook -i playbook/inventory.ini playbook/jenkins.yml
+      working-directory: ${{ github.workspace }}
+      env:
+         ANSIBLE_HOST_KEY_CHECKING: "False"  # Disable host key checking
+    
     - name: Run Ansible Playbook
       run: |
         ansible-playbook -i inventory.ini jenkins.yml
