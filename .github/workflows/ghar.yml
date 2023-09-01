@@ -1,9 +1,11 @@
 name: Ansible Deployment
 
 on:
-  push:
-    branches:
-      - main  # Trigger on changes to the main branch
+  repository_dispatch:
+    types: [ansible-deployment-workflow]
+  #push:
+   # branches:
+    #  - main  # Trigger on changes to the main branch
 
 jobs:
   deploy:
