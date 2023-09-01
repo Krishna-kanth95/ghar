@@ -6,9 +6,6 @@ on:
       environment:
         description: 'The environment to deploy to'
         default: 'staging'
-      tag:
-        description: 'The tag to deploy'
-        required: true
   #push:
    # branches:
     #  - main  # Trigger on changes to the main branch
