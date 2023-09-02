@@ -5,6 +5,7 @@ on:
      inputs:
       environment:
         description: 'The environment to deploy to'
+        required: true
         default: 'staging'
   #push:
    # branches:
