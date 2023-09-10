@@ -5,7 +5,7 @@ import requests
 import base64
 
 BUCKET_NAME = 'testlambda1bucket'
-INSTANCE_FILE_KEY = 'instance-ids.txt'
+INSTANCE_FILE_KEY = 'instance-ips.txt'
 GITHUB_INVENTORY = 'https://api.github.com/repos/Krishna-kanth95/ghar/contents/inventory.ini'
 GITHUB_ACTIONS = 'https://api.github.com/repos/Krishna-kanth95/ghar/actions/workflows/ghar.yml/dispatches'
 
