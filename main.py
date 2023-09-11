@@ -14,12 +14,12 @@ headers['Authorization'] = f'Bearer {os.environ["GIT_TOKEN"]}'
 headers['Accept'] = 'application/vnd.github.v3+json'
 headers['X-GitHub-Api-Version'] = '2022-11-28'
 
-def encode_ips(private_ip):
-    encoded_ips = []
-    for ip in private_ip:
-        encoded_ip = base64.b64encode(ip.encode('utf-8')).decode('utf-8')
-        encoded_ips.append(encoded_ip)
-    return encoded_ips
+# def encode_ips(private_ip):
+#     encoded_ips = []
+#     for ip in private_ip:
+#         encoded_ip = base64.b64encode(ip.encode('utf-8')).decode('utf-8')
+#         encoded_ips.append(encoded_ip)
+#     return encoded_ips
 
 
 def update_git_inventory_file(private_ips):
