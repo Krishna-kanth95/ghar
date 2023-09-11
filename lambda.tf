@@ -128,7 +128,7 @@ resource "aws_s3_bucket_policy" "s3bucket_policy" {
 }
 
 # Create an S3 bucket object (text file)
-resource "aws_s3_bucket_object" "example_object" {
+resource "aws_s3_object" "example_object" {
   bucket = aws_s3_bucket.example_bucket.id
   key    = "instance-ids.txt"
   source = "instance-ids.txt"          # Replace with the path to a local file
