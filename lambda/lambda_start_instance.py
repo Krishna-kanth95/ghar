@@ -8,8 +8,7 @@ def instance_state(instance_id):
     response = ec2.describe_instances(
         InstanceIds=[instance_id]
     )
-    instance = response['Reservations'][0]['Instances'][0]
-    state_name = instance['State']['Name']
+    state_name = response['Reservations'][0]['Instances'][0]['State']['Name']
     return state_name
     
 def lambda_handler(event, context):
