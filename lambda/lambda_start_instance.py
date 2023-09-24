@@ -24,7 +24,7 @@ def lambda_handler(event, context):
         print(f'{instance_id} server is currently stopping. Cannot start until fully stopped.')
         
         while instance_state(instance_id) != 'stopped':
-            time.sleep(10)
+            time.sleep(20)
         ec2.start_instances(InstanceIds=[instance_id])
         print(f'{instance_id} server is starting up.')
 
