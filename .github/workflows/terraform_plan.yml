@@ -17,16 +17,18 @@ jobs:
         run: |
           mkdir -p TF
           cp -r Terraform/* TF/
-        working-directory: ${{ github.workspace }}
+        working-directory: ${{ github.workspace }}/TF
         
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Init
         run: terraform init
+        working-directory: ${{ github.workspace }}/TF
 
       - name: Terraform Plan
         run: terraform plan
+        working-directory: ${{ github.workspace }}/TF
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
