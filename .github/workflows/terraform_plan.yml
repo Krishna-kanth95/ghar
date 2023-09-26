@@ -12,7 +12,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
+        
+      - name: Copy Playbook and Inventory to Runner
+        run: |
+          mkdir -p TF
+          cp -r Terraform/* TF/
+        working-directory: ${{ github.workspace }}
+        
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
