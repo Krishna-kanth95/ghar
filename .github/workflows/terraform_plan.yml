@@ -18,7 +18,10 @@ jobs:
          mkdir -p ${{ github.workspace }}/terraform
          cp main/Terraform/*.tf ${{ github.workspace }}/terraform
         working-directory: ${{ github.workspace }}/terraform
-        
+       
+      - name: Set permissions
+        run: chmod -R 755 ${{ github.workspace }}/terraform
+
       # - name: Setup Terraform
       #   uses: hashicorp/setup-terraform@v1
 
