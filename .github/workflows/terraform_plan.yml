@@ -1,13 +1,13 @@
 name: 'Terraform Plan'
 on:
   push:
-    branches:
+    branches-ignore:
       - main
 
 jobs:
   terraform:
     name: 'Terraform'
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
