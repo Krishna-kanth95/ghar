@@ -1,45 +1,41 @@
 name: 'Terraform Apply'
+
 on:
   push:
     branches:
       - main
     paths:
       - '**.tf'
-    types:
-      - opened
-      - synchronize
-      - reopened
-    jobs:
-      check_commit:
-        runs-on: ubuntu-latest
-        outputs:
-          apply: ${{ steps.check_commit.outputs.apply }}
-        steps:
-          - name: Check commit for 'terraform apply'
-            id: check_commit
-            run: |
-              echo "::set-output name=apply::$(git log --format=%B -n 1 ${{ github.event.after }} | grep -F -q 'terraform apply' && echo 'true' || echo 'false')"
 
-      terraform:
-        needs: check_commit
-        if: needs.check_commit.outputs.apply == 'true'
-        name: 'Terraform'
-        runs-on: ubuntu-latest
+jobs:
+  check_commit:
+    runs-on: ubuntu-latest
+    outputs:
+      apply: ${{ steps.check_commit.outputs.apply }}
+    steps:
+      - name: Check commit for 'terraform apply'
+        id: check_commit
+        run: |
+          echo "::set-output name=apply::$(git log --format=%B -n 1 ${{ github.event.after }} | grep -F -q 'terraform apply' && echo 'true' || echo 'false')"
 
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v2
+  terraform:
+    needs: check_commit
+    if: needs.check_commit.outputs.apply == 'true'
+    name: 'Terraform'
+    runs-on: ubuntu-latest
 
-          - name: Setup Terraform
-            uses: hashicorp/setup-terraform@v1
-            with:
-              terraform_version: 1.0.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-          - name: Terraform Init
-            run: terraform init
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
 
-          - name: Terraform Apply
-            run: terraform apply -auto-approve
-            env:
-              AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-              AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
