@@ -7,28 +7,28 @@ on:
 jobs:
   terraform:
     name: 'Terraform'
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Copy Playbook and Inventory to Runner
+      - name: Copy Terraform files
         run: |
-          mkdir -p TF
-          cp -r Terraform/* TF/
+         mkdir -p ${{ github.workspace }}/terraform
+         cp main/Terraform/*.tf ${{ github.workspace }}/terraform
         working-directory: ${{ github.workspace }}/TF
         
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ${{ github.workspace }}/TF
+        working-directory: ${{ github.workspace }}/terraform
 
       - name: Terraform Plan
         run: terraform plan
-        working-directory: ${{ github.workspace }}/TF
+        working-directory: ${{ github.workspace }}/terraform
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
