@@ -16,7 +16,7 @@ jobs:
       - name: Copy Terraform files
         run: |
          mkdir -p ${{ github.workspace }}/terraform
-         cp main/Terraform/*.tf ${{ github.workspace }}/terraform
+         cp ./Terraform/* ${{ github.workspace }}/terraform
         working-directory: ${{ github.workspace }}/terraform
        
       - name: Set permissions
