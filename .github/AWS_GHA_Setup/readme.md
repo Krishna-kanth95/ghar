@@ -1,4 +1,9 @@
-# Configure AWS with GitHub Actions to run Terrform(IaC)
+# Run Terraform(IaC) with GitHub Actions
+
+## Architecture Diagram
+![image](https://github.com/Krishna-kanth95/ghar/assets/93731192/5b069828-a4c2-4038-90fb-485e2b4c2883)
+![image](https://github.com/Krishna-kanth95/ghar/assets/93731192/609730da-a1c5-46a3-93e9-3636d1cccbc5)
+Source: [CloudScalr](https://www.youtube.com/watch?v=GowFk_5Rx_I&t=281s)
 
 ### 1. Create an OPenID Connect in AWS 
 * IAM > Access Management > Identity Providers > OpenID Connect
