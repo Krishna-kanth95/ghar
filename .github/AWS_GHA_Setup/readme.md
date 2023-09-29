@@ -1,9 +1,18 @@
 # Run Terraform(IaC) with GitHub Actions
 
 ## Architecture Diagram
-![image](https://github.com/Krishna-kanth95/ghar/assets/93731192/5b069828-a4c2-4038-90fb-485e2b4c2883)
 ![image](https://github.com/Krishna-kanth95/ghar/assets/93731192/609730da-a1c5-46a3-93e9-3636d1cccbc5)
+![image](https://github.com/Krishna-kanth95/ghar/assets/93731192/5b069828-a4c2-4038-90fb-485e2b4c2883)
 Source: [CloudScalr](https://www.youtube.com/watch?v=GowFk_5Rx_I&t=281s)
+
+### Explanation
+- GitHub Actions(GHA) will request a Java Web Token(JWT) to the GitHub  OpenID Connect (OIDC) Provider
+- GitHub OIDC Provier will provide a signed JWT to GHA
+- GHA uses the signed JWT to access a temporary access token from AWS IAM (Identity Provider)
+- IAM IP will veriofy the signed JWT with the GH OIDC Provider and verify is the role we want to assume can be used by the IP
+- If approved, IAM IP will use the temporary access token from the role to the GHA. After the authentication, GHA environment will get access to AWS with the policy limitations attached to the IAM role it assumed.
+
+
 
 ### 1. Create an OPenID Connect in AWS 
 * IAM > Access Management > Identity Providers > OpenID Connect
