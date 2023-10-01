@@ -4,6 +4,7 @@ on:
   pull_request:
     branches-ignore:
       - main
+    types: [opened, synchronize, reopened]
 
   issue_comment:
     types: [created]
@@ -41,7 +42,8 @@ jobs:
   terraform-apply:
     if: |
       github.event_name == 'issue_comment' &&
-      github.event.comment.body == 'terraform apply --auto-approve'
+      github.event.comment.body == 'terraform apply --auto-approve' &&
+      github.event.issue.pull_request
     needs: terraform-plan
     runs-on: self-hosted
 
