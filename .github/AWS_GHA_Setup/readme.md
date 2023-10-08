@@ -1,4 +1,5 @@
 # Run Terraform(IaC) with GitHub Actions
+https://cloudscalr.com/deploy-to-aws-with-terraform-within-a-github-action/
 
 ## Architecture Diagram
 ![image](https://github.com/Krishna-kanth95/ghar/assets/93731192/609730da-a1c5-46a3-93e9-3636d1cccbc5)
