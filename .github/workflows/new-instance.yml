@@ -1,10 +1,10 @@
 name: EC2 Instance Created
 
-on:
-  workflow_run:
-    workflows: ["Trigger Workflow"]
-    types:
-      - completed
+# on:
+#   workflow_run:
+#     workflows: ["Trigger Workflow"]
+#     types:
+#       - completed
 
 jobs:
   update_inventory:
