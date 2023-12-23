@@ -13,22 +13,29 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted  # Specify your self-hosted runner's label here
-
+    runs-on: ansible-runner # Specify your self-hosted runner's label here
+    env:
+      working-directory: /home/krishna/actions-runner/git
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Copy Playbook and Inventory to Runner
+        working-directory: ${{ env.working-directory}}
         run: |
-          mkdir -p playbook
-          cp -r jenkins.yml playbook/
-          cp inventory.ini playbook/
-        working-directory: ${{ github.workspace }}
+          cp -r jenkins.yml .
+          cp -r inventory.ini .
+          cp -r domain_join.sh .
+          chmod a+x domain_join.sh
 
+      - name: Copy Playbook and Inventory to Runner
+        working-directory: ${{ env.working-directory}}
+        run: 
+          ./domain_join.sh
+          
       - name: Run Ansible Playbook
+        working-directory: ${{ env.working-directory}}
         run: |
           ansible-playbook -i playbook/inventory.ini playbook/jenkins.yml
-        working-directory: ${{ github.workspace }}
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"  # Disable host key checking
