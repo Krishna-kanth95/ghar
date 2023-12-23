@@ -1,13 +1,13 @@
 name: Terraform Plan & Apply
 
-on:
-  pull_request:
-    branches-ignore:
-      - main
-    types: [opened, synchronize, reopened]
+# on:
+#   pull_request:
+#     branches-ignore:
+#       - main
+#     types: [opened, synchronize, reopened]
 
-  issue_comment:
-    types: [created]
+#   issue_comment:
+#     types: [created]
 
 jobs:
   terraform-plan:
